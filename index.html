@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Willst du mit mir gehen?</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+  #container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  h1 {
+    font-size: 32px;
+  }
+  .error {
+    color: red;
+    display: none;
+  }
+  #firework {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <h1>Willst du mit mir gehen?</h1>
+  <input type="checkbox" id="ja" name="antwort" value="Ja">
+  <label for="ja">Ja</label>
+  <input type="checkbox" id="nein" name="antwort" value="Nein">
+  <label for="nein">Nein</label>
+  <input type="checkbox" id="vielleicht" name="antwort" value="Vielleicht">
+  <label for="vielleicht">Vielleicht</label>
+  <br>
+  <div id="error" class="error">Bitte wähle eine Antwort.</div>
+</div>
+
+<div id="firework"></div>
+
+<script>
+  const jaCheckbox = document.getElementById('ja');
+  const neinCheckbox = document.getElementById('nein');
+  const vielleichtCheckbox = document.getElementById('vielleicht');
+  const errorDiv = document.getElementById('error');
+  const fireworkDiv = document.getElementById('firework');
+
+  jaCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      fireworkDiv.innerHTML = '<iframe src="https://giphy.com/embed/xUn3C5pCbNmirpoBqM" width="100%" height="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>';
+      fireworkDiv.style.display = 'block';
+      neinCheckbox.checked = false;
+      vielleichtCheckbox.checked = false;
+      errorDiv.style.display = 'none';
+    } else {
+      fireworkDiv.style.display = 'none';
+    }
+  });
+
+  neinCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      jaCheckbox.checked = false;
+      vielleichtCheckbox.checked = false;
+      errorDiv.style.display = 'block';
+      fireworkDiv.style.display = 'none';
+    } else {
+      errorDiv.style.display = 'none';
+    }
+  });
+
+  vielleichtCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      jaCheckbox.checked = false;
+      neinCheckbox.checked = false;
+      errorDiv.style.display = 'block';
+      fireworkDiv.style.display = 'none';
+    } else {
+      errorDiv.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
